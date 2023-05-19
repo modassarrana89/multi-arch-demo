@@ -7,7 +7,9 @@ env:
   IMAGE_NAME: test-multi-arch
   IMAGE_TAG: latest
   IMAGE_REGISTRY: quay.io
-  IMAGE_NAMESPACE: mayurwaghmode111
+  IMAGE_NAMESPACE: morana
+  QUAY_USER:  morana
+  QUAY_PWD: Cgkc6cGY0aAgyqDboVQceocJuH5Vw7CSs+FZ/x4KDYGTTMSun/eTYydqZqSLw3kPpq8HOeDseHPOcAMEQmwJLA==
 
 jobs:
   build:
@@ -37,8 +39,8 @@ jobs:
           image: ${{ steps.build-image.outputs.image }}
           tags: ${{ steps.build-image.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAMESPACE }}
-          username: ${{ secrets.QUAY_USER }}
-          password: ${{ secrets.QUAY_PWD }}
+          username: ${{ env.QUAY_USER }}
+          password: ${{ env.QUAY_PWD }}
 
       - name: Print image url
         run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
